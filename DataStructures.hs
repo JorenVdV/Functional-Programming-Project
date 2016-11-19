@@ -3,7 +3,9 @@ module ProjectDataStructures(
     AttributeName,
     DomainValue,
     TargetValue,
-    Instance
+    Instance, 
+    Attribute, 
+    Set
 ) where 
 
 
@@ -18,15 +20,14 @@ type Instance = [String]
 
 
 -- Data structures
-
-data Attribute AttributeName DomainValue =  
+data Attribute =  
     Attribute {attributeName::AttributeName, domainValue::DomainValue} deriving (Show)
 
-data Set DataSet =
-    Set {dataSet::DataSet} deriving (Show)
+data DataSet = DataSet [Attribute] deriving (Show)
 
-data Tree = 
-    Leaf 
-    | Node (AttributeName, DomainValue) [Tree] 
-deriving (Show)
+data Set = Set [DataSet] deriving (Show)
+
+--data Tree = 
+--     Leaf 
+--    | Node Attribute [Tree] deriving (Show)
 
