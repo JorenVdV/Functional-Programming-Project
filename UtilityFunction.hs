@@ -4,8 +4,14 @@ module ProjectUtilityFunctions where
 import Data.List(maximumBy)
 import Data.Ord(comparing)
 
---unique :: (Ord a) => [a] -> [a]
---unique list =
+
+-- analog to nub implementation by haskell
+unique :: (Ord a) => [a] -> [a]
+unique list = unique' list []
+where unique' [] _ = []
+    unique' (l:ist) seen
+        | elem l seen = unique ist seen
+        | otherwise = l:unique ist (l:seen)
     
 -- argmax: returns index of largests element in the row
 argmax :: (Ord a) => [a] -> Int
