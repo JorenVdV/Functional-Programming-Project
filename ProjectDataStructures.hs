@@ -5,7 +5,6 @@ module ProjectDataStructures(
     TargetValue,
     Instance, 
     Attribute,
-    DataSet, 
     Set,
     attributeName,
     domainValue
@@ -23,20 +22,18 @@ type Instance = [String]
 
 
 -- Data structures
-data Attribute =  
-    Attribute AttributeName DomainValue deriving (Show)
+type Attribute = (AttributeName, [DomainValue])
+--data Attribute =  
+--    Attribute AttributeName [DomainValue] deriving (Show)
 
 attributeName :: Attribute -> AttributeName
-attributeName (Attribute attributeName domainValue ) = attributeName
+attributeName attribute = fst attribute
 
-domainValue :: Attribute -> DomainValue
-domainValue (Attribute attributeName domainValue) = domainValue
+domainValue :: Attribute -> [DomainValue]
+domainValue attribute = snd attribute
 
 -- Type synonym for [Attribute]
-type DataSet = [Attribute]
-
--- Type synonym for [DataSet]
-type Set = [DataSet]
+type Set = [Attribute]
 
 
 --data Tree = 

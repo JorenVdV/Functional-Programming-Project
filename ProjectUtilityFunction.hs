@@ -10,7 +10,6 @@ import ProjectDataStructures(
     TargetValue,
     Instance,
     Attribute,
-    DataSet,
     Set,
     attributeName,
     domainValue
@@ -33,30 +32,13 @@ argmax xs =
     where 
         indexedxs = zip [0..(length xs)-1] xs
         cmp = comparing snd
-        
--- retrieves all possible attributenames, considering rows that have less attributenames
---getAttributeNames :: Set -> [AttributeName]
---getAttributeNames set = getAttributeNames' set [] 
---    where 
---        getAttributeNames' [] seen = seen
---        getAttributeNames' (s:et) seen =
---            getAttributeNames' et $ checkAttributeNames [attributeName x| x<-s] seen
---            where
---                checkAttributeNames [] seen = seen
---                checkAttributeNames (a:ttributes) seen
---                    | elem a seen = checkAttributeNames ttributes seen
---                    | otherwise = checkAttributeNames ttributes (a:seen)
 
 getAttributeNames :: Set -> [AttributeName]
-getAttributeNames set = getAttributeNames' set []
-    where 
-        getAttributeNames' [] seen = seen
-        getAttributeNames' (s:et) seen = 
-            getAttributeNames' et ([attributeName x| x <- s, not $ elem (attributeName x) seen]++seen)
+getAttributeNames set = 
+    [attributeName x | x <- set]
 
 -- retrieves all domainvalues for a given attributename
 getDomainValues :: Set -> AttributeName -> [DomainValue]
-getDomainValues [] _ = []
-getDomainValues (s:et) attributename =
+getDomainValues set attributename =
     -- only take first domainvalue for the attribute name, should be list of 1 element
-    head [domainValue x | x <- s, attributeName x == attributename] : getDomainValues et attributename
+    head [domainValue x | x <- set , attributeName x == attributename]
