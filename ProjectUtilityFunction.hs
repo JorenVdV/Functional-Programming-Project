@@ -46,3 +46,11 @@ getAttributeNames set = getAttributeNames' set []
                 checkAttributeNames (a:ttributes) seen
                     | elem a seen = checkAttributeNames ttributes seen
                     | otherwise = checkAttributeNames ttributes (a:seen)
+
+
+-- retrieves all domainvalues for a given attributename
+getDomainValues :: Set -> AttributeName -> [DomainValue]
+getDomainValues [] _ = []
+getDomainValues (s:et) attributename =
+    -- only take first domainvalue for the attribute name, should be list of 1 element
+    head [domainValue x | x <- s, attributeName x == attributename] : getDomainValues et attributename
