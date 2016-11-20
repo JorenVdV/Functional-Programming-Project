@@ -2,6 +2,7 @@ module ProjectReadInput where
 
 import System.IO
 import Data.Char
+import Data.List.Split
 import ProjectDataStructures(
     Filename,
     AttributeName,
@@ -27,10 +28,7 @@ parseCsv :: String -> Set
 parseCsv contents = 
     let contentlines = lines contents
     in 
-        createAttributes attributes dataset
-        where
-            attributes = map createInstance (head contentlines)
-            dataset = map createInstance (tail contentlines)
+        createAttributes (createInstance (head contentlines)) (map createInstance (tail contentlines))
 
 createInstance :: String -> Instance
 createInstance line =
@@ -41,4 +39,4 @@ createAttributes attributes datasets =
     [createAttributes' attributes y | y <- datasets]
     where 
         createAttributes' attributes dataset= 
-            [Attribute (fst x) (snd x)|x <- (zip attributes instances)]
+            [Attribute (fst x) (snd x) | x <- (zip attributes instances)]
