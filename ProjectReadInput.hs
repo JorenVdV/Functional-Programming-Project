@@ -3,6 +3,7 @@ module ProjectReadInput where
 import System.IO
 import Data.Char
 import Data.List.Split
+import Data.List
 import ProjectDataStructures(
     Filename,
     AttributeName,
@@ -10,7 +11,6 @@ import ProjectDataStructures(
     TargetValue,
     Instance,
     Attribute,
-    DataSet,
     Set,
     attributeName,
     domainValue
@@ -31,12 +31,13 @@ parseCsv contents =
         createAttributes (createInstance (head contentlines)) (map createInstance (tail contentlines))
 
 createInstance :: String -> Instance
-createInstance line =
-    splitOn "," line
+createInstance instanceStr =
+    splitOn "," instanceStr
 
 createAttributes :: [String] -> [Instance] -> [Attribute]
-createAttributes attributes datasets =
-    [createAttributes' attributes y | y <- datasets]
-    where 
-        createAttributes' attributes dataset= 
-            [Attribute (fst x) (snd x) | x <- (zip attributes instances)]
+createAttributes headerStr instances =
+    let transposedInstances = transpose instances
+        zippedInstances = zip headerStr transposedInstances
+    in
+        zippedInstances
+
