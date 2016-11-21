@@ -3,17 +3,7 @@ module UtilityFunctions where
 --imports 
 import Data.List(maximumBy)
 import Data.Ord(comparing)
-import DataStructures(
-    Filename,
-    AttributeName,
-    DomainValue,
-    TargetValue,
-    Instance,
-    Attribute,
-    Set,
-    attributeName,
-    domainValue
-    )
+import DataStructures
 
 -- makes array unique
 -- analog to nub implementation by haskell
@@ -41,4 +31,9 @@ getAttributeNames set =
 getDomainValues :: Set -> AttributeName -> [DomainValue]
 getDomainValues set attributename =
     -- only take first domainvalue for the attribute name, should be list of 1 element
-    head [domainValue x | x <- set , attributeName x == attributename]
+    head [domainValues x | x <- set , attributeName x == attributename]
+
+getTargetValues :: Set -> [DomainValue]
+getTargetValues set = 
+    domainValues $ last set
+

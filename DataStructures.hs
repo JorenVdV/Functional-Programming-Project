@@ -7,7 +7,7 @@ module DataStructures(
     Attribute,
     Set,
     attributeName,
-    domainValue
+    domainValues
 ) where 
 
 
@@ -29,8 +29,8 @@ type Attribute = (AttributeName, [DomainValue])
 attributeName :: Attribute -> AttributeName
 attributeName attribute = fst attribute
 
-domainValue :: Attribute -> [DomainValue]
-domainValue attribute = snd attribute
+domainValues :: Attribute -> [DomainValue]
+domainValues attribute = snd attribute
 
 -- Type synonym for [Attribute]
 type Set = [Attribute]

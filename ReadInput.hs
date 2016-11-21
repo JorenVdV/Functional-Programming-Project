@@ -13,7 +13,7 @@ import DataStructures(
     Attribute,
     Set,
     attributeName,
-    domainValue
+    domainValues
     )
 
 readCsv :: Filename -> IO Set
