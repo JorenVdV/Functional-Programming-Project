@@ -18,11 +18,8 @@ import ProjectDataStructures(
 
 readCsv :: Filename -> IO Set
 readCsv filename = do
-    handle <- openFile filename ReadMode
-    contents <- hGetContents handle
-    hClose handle
-    parsed <- parseCsv contents
-    return parsed
+    contents <- readFile filename
+    return $ parseCsv contents
 
 parseCsv :: String -> Set
 parseCsv contents = 
