@@ -24,8 +24,10 @@ readCsv filename = do
 parseCsv :: String -> Set
 parseCsv contents = 
     let contentlines = lines contents
+        header = createInstance $ head contentlines
+        instances = map createInstance $ tail contentlines
     in 
-        createAttributes (createInstance (head contentlines)) (map createInstance (tail contentlines))
+        createAttributes header instances
 
 createInstance :: String -> Instance
 createInstance instanceStr =
