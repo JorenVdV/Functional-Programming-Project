@@ -1,4 +1,4 @@
-module ProjectDataStructures(
+module DataStructures(
     Filename,
     AttributeName,
     DomainValue,

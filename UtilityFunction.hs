@@ -1,9 +1,9 @@
-module ProjectUtilityFunctions where
+module UtilityFunctions where
 
 --imports 
 import Data.List(maximumBy)
 import Data.Ord(comparing)
-import ProjectDataStructures(
+import DataStructures(
     Filename,
     AttributeName,
     DomainValue,

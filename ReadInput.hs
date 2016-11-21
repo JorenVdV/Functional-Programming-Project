@@ -1,10 +1,10 @@
-module ProjectReadInput where 
+module ReadInput where 
 
 import System.IO
 import Data.Char
 import Data.List.Split
 import Data.List
-import ProjectDataStructures(
+import DataStructures(
     Filename,
     AttributeName,
     DomainValue,
