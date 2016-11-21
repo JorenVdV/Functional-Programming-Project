@@ -34,7 +34,6 @@ createInstance instanceStr =
 createAttributes :: [String] -> [Instance] -> [Attribute]
 createAttributes headerStr instances =
     let transposedInstances = transpose instances
-        zippedInstances = zip headerStr transposedInstances
     in
-        zippedInstances
+        zip headerStr transposedInstances
 
