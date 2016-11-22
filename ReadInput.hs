@@ -4,17 +4,7 @@ import System.IO
 import Data.Char
 import Data.List.Split
 import Data.List
-import DataStructures(
-    Filename,
-    AttributeName,
-    DomainValue,
-    TargetValue,
-    Instance,
-    Attribute,
-    Set,
-    attributeName,
-    domainValues
-    )
+import DataStructures
 
 readCsv :: Filename -> IO Set
 readCsv filename = do
@@ -35,7 +25,8 @@ createInstance instanceStr =
 
 createAttributes :: [String] -> [Instance] -> [Attribute]
 createAttributes headerStr instances =
-    let transposedInstances = transpose instances
+    let 
+        transposedInstances = transpose instances
     in
         zip headerStr transposedInstances
 
