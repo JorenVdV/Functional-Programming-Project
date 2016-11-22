@@ -76,7 +76,7 @@ createSet :: Set -> AttributeName -> DomainValue -> Set
 createSet set attributename domainvalue =
     let
         attributevals = getDomainValues set attributename
-        allattributeNames = getAttributeNames set
+        allattributeNames = filter (/= attributename) $ getAttributeNames set
         alldomainvals = map (getDomainValues set) allattributeNames
         alldomainvalsuntransposed = transpose alldomainvals
         alldomainvalsuntransposedfiltered = map (snd) $ filter (\x -> fst x == domainvalue) $ zip attributevals alldomainvalsuntransposed
