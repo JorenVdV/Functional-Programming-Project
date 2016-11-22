@@ -1,14 +1,4 @@
-module DataStructures(
-    Filename,
-    AttributeName,
-    DomainValue,
-    TargetValue,
-    Instance, 
-    Attribute,
-    Set,
-    attributeName,
-    domainValues
-) where 
+module DataStructures where 
 
 
 -- Type synonyms for String    
@@ -36,7 +26,7 @@ domainValues attribute = snd attribute
 type Set = [Attribute]
 
 
---data Tree = 
---     Leaf 
---    | Node Attribute [Tree] deriving (Show)
+data Tree a = 
+     Leaf TargetValue
+    | Node a DomainValue [Tree a] deriving (Show, Read, Eq)
 

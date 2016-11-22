@@ -1,20 +1,26 @@
 module UtilityFunctions where
 
 --imports 
+import Data.List
 import Data.List(maximumBy)
 import Data.Ord(comparing)
 import DataStructures
 
 -- makes array unique
 -- analog to nub implementation by haskell
-unique :: (Ord a) => [a] -> [a]
-unique list = unique' list []
+unique2 :: (Ord a) => [a] -> [a]
+unique2 list = unique' list []
     where 
         unique' [] seen = reverse seen
         unique' (l:ist) seen
             | l `elem` seen = unique' ist seen
             | otherwise = unique' ist (l:seen)
-    
+
+unique :: (Ord a) => [a] -> [a]
+unique list = 
+    map (head) $ group $ sort list
+
+
 -- returns index of largests element in the row
 argmax :: (Ord a) => [a] -> Int
 argmax xs =
