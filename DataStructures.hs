@@ -4,6 +4,7 @@ module DataStructures where
 -- Type synonyms for String    
 type Filename = String
 type AttributeName = String
+type TargetName = String
 type DomainValue = String
 type TargetValue = String
 

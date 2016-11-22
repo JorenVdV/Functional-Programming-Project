@@ -39,7 +39,7 @@ getDomainValues set attributename =
     -- only take first domainvalue for the attribute name, should be list of 1 element
     head [domainValues x | x <- set , attributeName x == attributename]
 
-getTargetValues :: Set -> [DomainValue]
-getTargetValues set = 
-    domainValues $ last set
+getTargetValues :: Set -> TargetName -> [TargetValue]
+getTargetValues set targetname = 
+    getDomainValues set targetname
 

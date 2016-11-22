@@ -7,51 +7,47 @@ import DataStructures
 import UtilityFunctions
 import ReadInput
 
--- a = #positve, b = #negative
-entropy :: Float -> Float -> Float
-entropy a b 
-    | isNaN $ ent a b = 0
-    | otherwise = ent a b
+
+entropysingle :: Float -> Float -> Float
+entropysingle elementsforval totalelements
+    | isNaN $ ent elementsforval totalelements = 0
+    | otherwise = ent elementsforval  totalelements
     where 
-        si1 = a/(a+b)
-        si2 = b/(a+b)
-        ent a b = - (si1 * logBase 2 si1) - (si2 * logBase 2 si2)
+        px = elementsforval / totalelements
+        ent elementsforval totalelements = (px * logBase 2 px)
 
---entropy' :: [Float] -> Float
---entropy' targetcounts
---    |isNaN $ ent' targetcounts = 0
---    | otherwise = ent' targetcounts
---    where
---        total = sum targetcounts
---        s = map (\x -> x/total) targetcounts
---        s2 = map (\x -> -x * (logBase 2 x))
---        ent' targetcounts = foldl1 (+) s2
-                
+entropy :: [Float] -> Float
+entropy list =
+    let
+        listtotal = sum list
+    in
+     -(sum $ map (\x -> entropysingle x listtotal) list)
+           
 
-purity :: Set -> AttributeName -> Float
-purity set attributename = 
+purity :: Set -> AttributeName -> TargetName-> Float
+purity set attributename targetname= 
     let
         domainvalues = getDomainValues set attributename
-        targetvalues =  getTargetValues set
+        targetvalues =  getTargetValues set targetname
         numberofvalues = length domainvalues
-        groupedvalues = groupBy (\a b -> fst a == fst b) $ sortBy (comparing fst) $ zip domainvalues targetvalues
-        -- [(#positve, #negative)]
-        countedvalues = map (\x ->
-                    (fromIntegral $ length $ filter (\y -> snd y == (snd $ head x)) x,
-                    fromIntegral $ length $ filter (\y -> snd y /= (snd $ head x)) x)) 
-                    groupedvalues
+        groupedvaluesbydomain = groupBy (\a b -> fst a == fst b) $ sortBy (comparing fst) $ zip domainvalues targetvalues
+        groupedvaluesbydomainandtarget = map (groupBy (\a b -> snd a == snd b)) $ map (sortBy (comparing snd)) groupedvaluesbydomain
+        -- [[countpertargevalue]]
+        countedvalues = map (\x -> map (\y ->fromIntegral $ length y) x) groupedvaluesbydomainandtarget
+
         -- [(entropy, totaalvandiedomainvaluegeweethe-tanguy)]
-        entvalues = map (\x -> (entropy (fst x) (snd x)) * ((fst x)+ (snd x))) countedvalues
+        entvalues = map (\x -> (entropy x) * (sum x) ) countedvalues
+        --entvalues = map (\x -> (entropy (fst x) (snd x)) * ((fst x)+ (snd x))) countedvalues
         entvaluesadjusted = map (\x -> x / (fromIntegral numberofvalues)) entvalues
     in
         foldl1 (\x element -> x + element) entvaluesadjusted
 
-setpurity :: Set -> Float
-setpurity set = 
+
+setpurity :: Set -> TargetValue -> Float
+setpurity set targetvalue = 
     let 
-        targetvalues = getTargetValues set
+        targetvalues = getTargetValues set targetvalue
         grouped = group $ sort targetvalues
-        a = fromIntegral $ length $ head grouped
-        b = fromIntegral $ length $ head $ tail grouped
+        counted = map (\x -> fromIntegral $ length x) grouped
     in
-        entropy a b
+        entropy counted
