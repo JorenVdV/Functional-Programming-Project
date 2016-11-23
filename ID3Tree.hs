@@ -9,6 +9,12 @@ import ID3Functions
 
 buildTree :: TargetName -> DomainValue -> Set -> Tree Set
 buildTree targetname domainvalue set 
+    | setpurity set targetname == 0 = 
+        let
+            targetvalue = head $ getTargetValues set targetname
+        in
+            Leaf domainvalue targetvalue set
+    
     | length set == 1 =
         let
             targetvalues = getTargetValues set targetname
@@ -17,12 +23,6 @@ buildTree targetname domainvalue set
             targetvaluescounted = map (\x -> (head x, (fromIntegral $ length x)/totaltargetvalues)) targetvaluesgrouped
         in
             UncertainLeaf domainvalue targetvaluescounted set
-
-    | setpurity set targetname == 0 = 
-        let
-            targetvalue = head $ getTargetValues set targetname
-        in
-            Leaf domainvalue targetvalue set
         
     | otherwise = 
         let 
