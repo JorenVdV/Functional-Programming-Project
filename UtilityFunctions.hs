@@ -43,3 +43,52 @@ getTargetValues :: Set -> TargetName -> [TargetValue]
 getTargetValues set targetname = 
     getDomainValues set targetname
 
+
+graphvizTree :: Tree Set -> GrapVizTree
+graphvizTree tree =
+    let
+        gvheader = "digraph id3Tree{\n"
+        gvfooter = "}"
+    in
+        gvheader ++ (makegraphvizTree "" tree) ++ gvfooter
+
+makegraphvizTree :: String -> Tree Set -> String
+makegraphvizTree parent (Node domainvalue attributename subtrees _) =
+    let
+        current = parent ++ domainvalue
+        relation = parent ++ " -> " ++ current ++ " [label=\"" ++ domainvalue ++"\"];\n"
+        node = current ++ " [label=\"Node " ++ attributename ++"\"];\n"
+        next = foldl1 (++) $ map (\x -> makegraphvizTree current x) subtrees
+    in
+        relation ++ node ++ next
+
+makegraphvizTree parent (Leaf domainvalue targetvalue _) =
+    let
+        current = parent ++ domainvalue
+        relation = parent ++ " -> " ++ current ++ "[label=\"" ++ domainvalue ++"\"];\n"
+        node = current ++ "[label=\"Leaf " ++ targetvalue ++"\"];\n"
+    in
+        relation ++ node
+    
+makegraphvizTree parent (UncertainLeaf domainvalue values _) = 
+    let
+        current = parent ++ domainvalue
+        relation = parent ++ " -> " ++ current ++ "[label=" ++ domainvalue ++"];\n"
+        node = current ++ "[label=\"UncertainLeaf\"];\n"
+        uncertain = foldl1 (++) $ map (mapuncertain current) values
+    in
+        relation ++ node ++ uncertain
+
+mapuncertain :: String -> (DomainValue, Float) -> String
+mapuncertain parent uncertainty =
+    let
+        uncertainvalue = fst uncertainty
+        uncertainlevel = snd uncertainty
+        current = parent ++ uncertainvalue
+        relation = parent ++ " -> " ++ current ++ " [label=" ++ (show uncertainlevel) ++"];\n"
+        node = current ++ " [label=\""++ uncertainvalue ++"\"];\n"
+    in
+        relation ++ node
+    
+        
+

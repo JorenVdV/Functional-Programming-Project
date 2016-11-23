@@ -7,6 +7,7 @@ type AttributeName = String
 type TargetName = String
 type DomainValue = String
 type TargetValue = String
+type GrapVizTree = String
 
 -- Type synonyms for [String]
 type Instance = [String]
@@ -14,8 +15,6 @@ type Instance = [String]
 
 -- Data structures
 type Attribute = (AttributeName, [DomainValue])
---data Attribute =  
---    Attribute AttributeName [DomainValue] deriving (Show)
 
 attributeName :: Attribute -> AttributeName
 attributeName attribute = fst attribute
@@ -29,5 +28,8 @@ type Set = [Attribute]
 
 data Tree a = 
      Leaf DomainValue TargetValue a
-    | Node DomainValue [Tree a] a deriving (Show, Read, Eq)
+    | Node DomainValue AttributeName [Tree a] a 
+    | UncertainLeaf DomainValue [(TargetValue, Float)] a
+    deriving (Show, Read, Eq)
+    
 
