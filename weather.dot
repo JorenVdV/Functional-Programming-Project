@@ -1,0 +1,18 @@
+digraph id3Tree{
+	start -> startroot [label="root"];
+	startroot [label="Node Outlook"];
+	startroot -> 	startrootovercast[label="overcast"];
+	startrootovercast[label="Leaf yes"];
+	startroot -> 	startrootrainy [label="rainy"];
+	startrootrainy [label="Node Windy"];
+	startrootrainy -> 	startrootrainyfalse[label="false"];
+	startrootrainyfalse[label="Leaf yes"];
+	startrootrainy -> 	startrootrainytrue[label="true"];
+	startrootrainytrue[label="Leaf no"];
+	startroot -> 	startrootsunny [label="sunny"];
+	startrootsunny [label="Node Humidity"];
+	startrootsunny -> 	startrootsunnyhigh[label="high"];
+	startrootsunnyhigh[label="Leaf no"];
+	startrootsunny -> 	startrootsunnynormal[label="normal"];
+	startrootsunnynormal[label="Leaf yes"];
+}

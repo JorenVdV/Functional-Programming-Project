@@ -1,10 +1,11 @@
-module ReadInput where 
+module ReadWrite where 
 
 import System.IO
 import Data.Char
 import Data.List.Split
 import Data.List
 import DataStructures
+
 
 readCsv :: Filename -> IO Set
 readCsv filename = do

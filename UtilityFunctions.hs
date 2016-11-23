@@ -50,7 +50,7 @@ graphvizTree tree =
         gvheader = "digraph id3Tree{\n"
         gvfooter = "}"
     in
-        gvheader ++ (makegraphvizTree "start" tree) ++ gvfooter
+        gvheader ++ (makegraphvizTree "\tstart" tree) ++ gvfooter
 
 makegraphvizTree :: String -> Tree Set -> String
 makegraphvizTree parent (Node domainvalue attributename subtrees _) =

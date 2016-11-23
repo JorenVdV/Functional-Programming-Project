@@ -4,7 +4,7 @@ import Data.List
 import Data.Ord(comparing)
 import DataStructures
 import UtilityFunctions
-import ReadInput
+import ReadWrite
 import ID3Functions
 
 buildTree :: TargetName -> DomainValue -> Set -> Tree Set

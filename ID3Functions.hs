@@ -5,7 +5,7 @@ import Data.List
 import Data.Ord(comparing)
 import DataStructures
 import UtilityFunctions
-import ReadInput
+import ReadWrite
 
 
 entropysingle :: Float -> Float -> Float
