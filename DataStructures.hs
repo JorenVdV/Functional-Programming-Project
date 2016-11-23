@@ -28,6 +28,6 @@ type Set = [Attribute]
 
 
 data Tree a = 
-     Leaf TargetValue
-    | Node a DomainValue [Tree a] deriving (Show, Read, Eq)
+     Leaf DomainValue TargetValue a
+    | Node DomainValue [Tree a] a deriving (Show, Read, Eq)
 

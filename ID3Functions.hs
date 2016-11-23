@@ -61,15 +61,15 @@ bestSplit set targetname =
     in 
         head $ drop index attributenames
 
-splitSet :: Set -> TargetName -> [(DomainValue,Set)]
+splitSet :: Set -> TargetName -> (AttributeName,[(DomainValue,Set)])
 splitSet set targetname
-    | setpurity set targetname == 0 = []
+    | setpurity set targetname == 0 = ("",[])
     |otherwise = 
         let 
             attributename = bestSplit set targetname
             domainvalues = unique2 $ getDomainValues set attributename
         in
-            map (\x -> (x, createSet set attributename x)) domainvalues
+            (attributename, map (\x -> (x, createSet set attributename x)) domainvalues)
 
 createSet :: Set -> AttributeName -> DomainValue -> Set
 createSet set attributename domainvalue =

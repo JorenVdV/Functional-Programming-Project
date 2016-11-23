@@ -1,0 +1,59 @@
+Node "root" 
+	[
+		Leaf "overcast" "yes" 
+			[
+				("Temperature",["hot","cool","mild","hot"]),
+				("Humidity",["high","normal","high","normal"]),
+				("Windy",["false","true","true","false"]),
+				("Play",["yes","yes","yes","yes"])
+			],
+		Node "rainy" 
+			[
+				Leaf "false" "yes" 
+					[
+						("Temperature",["mild","cool","mild"]),
+						("Humidity",["high","normal","normal"]),
+						("Play",["yes","yes","yes"])
+					],
+				Leaf "true" "no" 
+					[
+						("Temperature",["cool","mild"]),
+						("Humidity",["normal","high"]),
+						("Play",["no","no"])
+					]
+			] 
+			[
+				("Temperature",["mild","cool","cool","mild","mild"]),
+				("Humidity",["high","normal","normal","normal","high"]),
+				("Windy",["false","false","true","false","true"]),
+				("Play",["yes","yes","no","yes","no"])
+			],
+		Node "sunny" 
+			[
+				Leaf "high" "no" 
+					[
+						("Temperature",["hot","hot","mild"]),
+						("Windy",["false","true","false"]),
+						("Play",["no","no","no"])
+					],
+				Leaf "normal" "yes" 
+					[
+						("Temperature",["cool","mild"]),
+						("Windy",["false","true"]),
+						("Play",["yes","yes"])
+					]
+			] 
+			[
+				("Temperature",["hot","hot","mild","cool","mild"]),
+				("Humidity",["high","high","high","normal","normal"]),
+				("Windy",["false","true","false","false","true"]),
+				("Play",["no","no","no","yes","yes"])
+			]
+	] 
+	[
+		("Outlook",["overcast","overcast","overcast","overcast","rainy","rainy","rainy","rainy","rainy","sunny","sunny","sunny","sunny","sunny"]),
+		("Temperature",["hot","cool","mild","hot","mild","cool","cool","mild","mild","hot","hot","mild","cool","mild"]),
+		("Humidity",["high","normal","high","normal","high","normal","normal","normal","high","high","high","high","normal","normal"]),
+		("Windy",["false","true","true","false","false","false","true","false","true","false","true","false","false","true"]),
+		("Play",["yes","yes","yes","yes","yes","yes","no","yes","no","no","no","no","yes","yes"])
+	]
