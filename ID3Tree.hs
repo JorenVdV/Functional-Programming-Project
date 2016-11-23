@@ -9,4 +9,5 @@ import ID3Functions.hs
 
 buildTree :: TargetName -> DomainValue -> Set -> Tree Set
 buildTree targetname domainvalue set 
-    | setpurity set targetname == 0
+    | setpurity set targetname == 0 = 
+        Tree Leaf head $ getDomainValues set targetname

@@ -34,7 +34,6 @@ purity set attributename targetname=
         groupedvaluesbydomainandtarget = map (groupBy (\a b -> snd a == snd b)) $ map (sortBy (comparing snd)) groupedvaluesbydomain
         -- [[countpertargevalue]]
         countedvalues = map (\x -> map (\y ->fromIntegral $ length y) x) groupedvaluesbydomainandtarget
-
         -- [(entropy, totaalvandiedomainvaluegeweethe-tanguy)]
         entvalues = map (\x -> (entropy x) * (sum x) ) countedvalues
         --entvalues = map (\x -> (entropy (fst x) (snd x)) * ((fst x)+ (snd x))) countedvalues
@@ -62,7 +61,7 @@ bestSplit set targetname =
     in 
         head $ drop index attributenames
 
-splitSet :: Set -> TargetName -> [Set]
+splitSet :: Set -> TargetName -> [(DomainValue,Set)]
 splitSet set targetname
     | setpurity set targetname == 0 = []
     |otherwise = 
@@ -70,7 +69,7 @@ splitSet set targetname
             attributename = bestSplit set targetname
             domainvalues = unique2 $ getDomainValues set attributename
         in
-            map (createSet set attributename) domainvalues
+            map (\x -> (x, createSet set attributename x)) domainvalues
 
 createSet :: Set -> AttributeName -> DomainValue -> Set
 createSet set attributename domainvalue =
