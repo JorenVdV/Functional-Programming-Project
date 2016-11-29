@@ -36,10 +36,9 @@ purity set attributename targetname=
         countedvalues = map (\x -> map (\y ->fromIntegral $ length y) x) groupedvaluesbydomainandtarget
         -- [(entropy, totaalvandiedomainvaluegeweethe-tanguy)]
         entvalues = map (\x -> (entropy x) * (sum x) ) countedvalues
-        --entvalues = map (\x -> (entropy (fst x) (snd x)) * ((fst x)+ (snd x))) countedvalues
         entvaluesadjusted = map (\x -> x / (fromIntegral numberofvalues)) entvalues
     in
-        foldl1 (\x element -> x + element) entvaluesadjusted
+        foldl1 (+) entvaluesadjusted
 
 
 setpurity :: Set -> TargetName -> Float
