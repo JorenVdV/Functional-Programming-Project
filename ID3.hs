@@ -9,7 +9,7 @@ import ID3Tree
 main :: IO()
 main = do
     dataset <- readCsv "weather.csv"
-    let tree = id3Tree dataset "Windy"
+    let tree = id3Tree dataset "Play"
     let dottree = graphvizTree tree
     writeFile  "weather.dot" dottree
     return ()
