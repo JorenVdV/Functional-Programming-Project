@@ -25,14 +25,12 @@ digraph id3Tree{
 	startrootnorainy[label="Leaf true"];
 	startrootno -> 	startrootnosunny [label="sunny"];
 	startrootnosunny [label="Node Temperature"];
-	startrootnosunny -> 	startrootnosunnyhot [label="hot"];
-	startrootnosunnyhot [label="Node Humidity"];
-	startrootnosunnyhot -> 	startrootnosunnyhothigh[label=high];
-	startrootnosunnyhothigh[label="UncertainLeaf"];
-	startrootnosunnyhothigh -> 	startrootnosunnyhothighfalse [label=0.5];
-	startrootnosunnyhothighfalse [label="false"];
-	startrootnosunnyhothigh -> 	startrootnosunnyhothightrue [label=0.5];
-	startrootnosunnyhothightrue [label="true"];
+	startrootnosunny -> 	startrootnosunnyhot[label=hot];
+	startrootnosunnyhot[label="UncertainLeaf"];
+	startrootnosunnyhot -> 	startrootnosunnyhotfalse [label=0.5];
+	startrootnosunnyhotfalse [label="false"];
+	startrootnosunnyhot -> 	startrootnosunnyhottrue [label=0.5];
+	startrootnosunnyhottrue [label="true"];
 	startrootnosunny -> 	startrootnosunnymild[label="mild"];
 	startrootnosunnymild[label="Leaf false"];
 }

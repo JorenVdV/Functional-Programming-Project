@@ -15,7 +15,7 @@ buildTree targetname domainvalue set
         in
             Leaf domainvalue targetvalue set
     
-    | length set == 1 =
+    | (length set == 1) || (maxInformationGain set targetname == 0)=
         let
             targetvalues = getTargetValues set targetname
             totaltargetvalues = fromIntegral $ length targetvalues

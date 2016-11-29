@@ -50,6 +50,16 @@ setpurity set targetname =
     in
         entropy counted
 
+maxInformationGain :: Set -> TargetName -> Float
+maxInformationGain set targetname = 
+    let 
+        setpuritycalc = setpurity set targetname
+        attributenames = filter (/=targetname) $ getAttributeNames set
+        informationgain = map (\x -> setpuritycalc - (purity set x targetname)) attributenames
+        index = argmax informationgain
+    in
+        head $ drop index informationgain
+
 bestSplit :: Set -> TargetName -> AttributeName
 bestSplit set targetname = 
     let 
